@@ -14,4 +14,11 @@
     <string name="settings_default_about">About</string>
     <string name="settings_label_bio_about">Right something about yourself</string>
     <string name="settings_text_lable">Settings</string>
+    <string name="cd_enter_verification_code">enter_verification_code</string>
+    <string name="input_code">Input Code</string>
+    <string name="we_send_you_sms">We send you SMS with verification code on Your phone number</string>
+    <string name="default_phone_number">+1(950)444-32-32</string>
+    <string name="sms_hint">_ _ _ _ _ _</string>
+    <string name="your_phone_num_is">Your Phone num is</string>
+    <string name="input_your_phone_num">input your phone num</string>
 </resources>

@@ -1,9 +1,7 @@
 package com.example.telega.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.example.telega.R
 
 
@@ -12,10 +10,14 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings){
 
     override fun onResume() {
         super.onResume()
+        setHasOptionsMenu(true)
 
     }
 
-
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        super.onCreateOptionsMenu(menu, inflater)
+        activity?.menuInflater?.inflate(R.menu.settings_action_manu,menu)
+    }
 
     companion object {
         @JvmStatic

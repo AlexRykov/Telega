@@ -7,6 +7,11 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="popupTheme">@style/actionMenu</item>
+        <item name="popupMenuStyle">@style/actionMenu</item>
+        <item name="colorControlActivated">@color/md_green_400</item>
+        <item name="android:colorBackground">@color/colorAccent</item>
+
 
         <!-- MaterialDrawer specific values -->
         <item name="material_drawer_background">@color/material_drawer_background</item>
@@ -83,4 +88,10 @@
         <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="android:background">@color/colorPrimary</item>
     </style>
+
+    <style name="actionMenu" parent="MaterialDrawerTheme.Light">
+        <item name="background">@color/primary</item>
+        <item name="actionMenuTextColor">@color/black</item>
+    </style>
+
 </resources>

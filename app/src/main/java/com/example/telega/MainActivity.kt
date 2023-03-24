@@ -1,7 +1,9 @@
 package com.example.telega
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.telega.activities.RegisterActivity
 import com.example.telega.databinding.ActivityMainBinding
 import com.example.telega.ui.fragment.ChatFragment
 import com.example.telega.ui.objects.AppDrawer
@@ -24,9 +26,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initFunc() {
-        setSupportActionBar(mToolbar)
-        mAppDrawer.create()
-        supportFragmentManager.beginTransaction().replace(R.id.data_container, ChatFragment()).commit()
+        if(false){
+            setSupportActionBar(mToolbar)
+            mAppDrawer.create()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.data_container, ChatFragment())
+                .commit()
+        } else {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 

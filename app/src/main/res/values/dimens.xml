@@ -16,5 +16,7 @@
     <dimen name="settings_user_photo_border">2dp</dimen>
     <dimen name="vertical_large">16dp</dimen>
     <dimen name="settings_ripple_effect_radius">4dp</dimen>
+    <dimen name="app_padding">5dp</dimen>
+    <dimen name="vertical_large_margin">20dp</dimen>
 
 </resources>
