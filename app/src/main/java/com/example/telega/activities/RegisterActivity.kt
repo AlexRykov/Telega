@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.example.telega.R
 import com.example.telega.databinding.ActivityRegisterBinding
 import com.example.telega.ui.fragment.InputPhoneNumberFragment
+import com.example.telega.utilits.intentFragment
 
 class RegisterActivity : AppCompatActivity() {
 //    private lateinit var mBinding: ActivityRegisterBinding
@@ -24,9 +25,7 @@ class RegisterActivity : AppCompatActivity() {
         mToolbar = findViewById(R.id.registerToolbar)
         setSupportActionBar(mToolbar)
         title = getString(R.string.your_phone_num_is)
-        supportFragmentManager.beginTransaction()
-            .add(R.id.register_data_container, InputPhoneNumberFragment())
-            .commit()
+        intentFragment(R.id.register_data_container, InputPhoneNumberFragment(), false)
 
     }
 }

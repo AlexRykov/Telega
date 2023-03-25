@@ -1,22 +1,25 @@
 package com.example.telega.ui.fragment
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
+import com.example.telega.MainActivity
 import com.example.telega.R
-import com.example.telega.databinding.FragmentInputPhoneNumberBinding
+import com.example.telega.activities.RegisterActivity
 import com.example.telega.databinding.FragmentInputVerificationCodeBinding
+import com.example.telega.utilits.AUTH
+import com.example.telega.utilits.AppTextWatcher
+import com.example.telega.utilits.intentActivity
+import com.example.telega.utilits.showToast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthProvider
 
 
-class InputVerificationCodeFragment : Fragment(R.layout.fragment_input_verification_code) {
+class InputVerificationCodeFragment(val phoneNum: String, val id: String) : Fragment(R.layout.fragment_input_verification_code) {
 
-    private lateinit var mBinding:FragmentInputVerificationCodeBinding
+    private lateinit var mBinding: FragmentInputVerificationCodeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -24,42 +27,38 @@ class InputVerificationCodeFragment : Fragment(R.layout.fragment_input_verificat
         mBinding = FragmentInputVerificationCodeBinding.inflate(inflater, container, false)
         return mBinding.root
     }
+        //      +1 650-555-3434
     override fun onStart() {
         super.onStart()
-        mBinding.registerInputPhoneNumber.addTextChangedListener (
-            object : TextWatcher{
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                }
-
-                override fun afterTextChanged(s: Editable?) {
+        (activity as RegisterActivity).title = phoneNum
+        mBinding.registerInputPhoneNumber.addTextChangedListener(
+            AppTextWatcher {
                     val stringA = mBinding.registerInputPhoneNumber.text.toString()
-                    if (stringA.length == 6) {
-                        verificateCode()
-                    }
-                }
+                    if (stringA.length == 6) {enterCode()}
             }
-                )
-    }
-    private fun verificateCode(){
-        Toast.makeText(activity, "OKAY", Toast.LENGTH_SHORT).show()
+        )
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstanceVerifyFragment() =
-            InputVerificationCodeFragment().apply {
-                arguments = Bundle().apply {
-                }
+    private fun enterCode() {
+        val code = mBinding.registerInputPhoneNumber.text.toString()
+        val credential = PhoneAuthProvider.getCredential(id, code)
+        AUTH.signInWithCredential(credential).addOnCompleteListener { task ->
+            if(task.isSuccessful){
+                showToast("Welcome")
+                (activity as RegisterActivity).intentActivity(MainActivity())
+            } else {
+                showToast(task.exception?.message.toString())
             }
+        }
     }
+
+//    companion object {
+//
+//        @JvmStatic
+//        fun newInstanceVerifyFragment() =
+//            InputVerificationCodeFragment(mPhoneNum, id).apply {
+//                arguments = Bundle().apply {
+//                }
+//            }
+//    }
 }

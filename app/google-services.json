@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "951842313974",
+    "project_id": "telega-18a0b",
+    "storage_bucket": "telega-18a0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951842313974:android:2dc5c6bd0611d9d70b3ed7",
+        "android_client_info": {
+          "package_name": "com.example.telega"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951842313974-inv2v4q8pi1lgl2s21a663h3btrahafe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnyRSMJOBN6joYmdAakGmlbod5mxpqqWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951842313974-inv2v4q8pi1lgl2s21a663h3btrahafe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

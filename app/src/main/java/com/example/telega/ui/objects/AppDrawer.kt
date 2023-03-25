@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.telega.R
 import com.example.telega.ui.fragment.SettingsFragment
+import com.example.telega.utilits.intentFragment
 import com.mikepenz.iconics.Iconics.applicationContext
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -90,10 +91,7 @@ class AppDrawer(val mainActivity: AppCompatActivity, val toolbar: Toolbar) {
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
                     when(position){
-                        7 -> mainActivity.supportFragmentManager.beginTransaction()
-                            .addToBackStack(null)
-                            .replace(R.id.data_container, SettingsFragment())
-                            .commit()
+                        7 -> mainActivity.intentFragment(R.id.data_container, SettingsFragment())
                     }
                     Toast.makeText(applicationContext, "Click on $position", Toast.LENGTH_SHORT).show()
                     return false
