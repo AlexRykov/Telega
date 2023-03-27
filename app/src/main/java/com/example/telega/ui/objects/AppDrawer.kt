@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.telega.R
 import com.example.telega.ui.fragment.SettingsFragment
 import com.example.telega.utilits.intentFragment
@@ -21,13 +22,34 @@ class AppDrawer(val mainActivity: AppCompatActivity, val toolbar: Toolbar) {
 
     private lateinit var mDrawer: Drawer
     private lateinit var mHeader: AccountHeader
+    private lateinit var mDrawerLayout: DrawerLayout
 
 
-    fun create(){
+    fun create() {
         crateHeader()
         createDrawer()
-
+        mDrawerLayout = mDrawer.drawerLayout
     }
+
+    fun disableDrawer() {
+        mDrawer.actionBarDrawerToggle?.isDrawerIndicatorEnabled = false
+        mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        Lock Drawer in Close (Invisible) Mode
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        toolbar.setNavigationOnClickListener {
+            mainActivity.supportFragmentManager.popBackStack()
+        }
+    }
+
+    fun enableDrawer() {
+        mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        mDrawer.actionBarDrawerToggle?.isDrawerIndicatorEnabled = true
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        toolbar.setNavigationOnClickListener {
+            mDrawer.openDrawer()
+        }
+    }
+
     //      Create left side thing with options
     private fun createDrawer() {
         mDrawer = DrawerBuilder()
@@ -90,10 +112,11 @@ class AppDrawer(val mainActivity: AppCompatActivity, val toolbar: Toolbar) {
                     position: Int,
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
-                    when(position){
+                    when (position) {
                         7 -> mainActivity.intentFragment(R.id.data_container, SettingsFragment())
                     }
-                    Toast.makeText(applicationContext, "Click on $position", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Click on $position", Toast.LENGTH_SHORT)
+                        .show()
                     return false
                 }
             })

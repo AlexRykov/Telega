@@ -1,12 +1,10 @@
 package com.example.telega.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.telega.R
-import com.example.telega.databinding.ActivityRegisterBinding
 import com.example.telega.ui.fragment.InputPhoneNumberFragment
+import com.example.telega.utilits.initFirebase
 import com.example.telega.utilits.intentFragment
 
 class RegisterActivity : AppCompatActivity() {
@@ -16,6 +14,7 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        initFirebase()
     }
 
 

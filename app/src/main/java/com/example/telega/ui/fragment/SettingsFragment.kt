@@ -1,7 +1,8 @@
 package com.example.telega.ui.fragment
 
-import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import com.example.telega.MainActivity
 import com.example.telega.R
 import com.example.telega.activities.RegisterActivity
@@ -33,12 +34,12 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings){
         return true
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ChatFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
-    }
+//    companion object {
+//        @JvmStatic
+//        fun newInstance(param1: String, param2: String) =
+//            ChatFragment().apply {
+//                arguments = Bundle().apply {
+//                }
+//            }
+//    }
 }

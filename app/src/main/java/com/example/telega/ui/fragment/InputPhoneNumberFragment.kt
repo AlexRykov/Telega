@@ -14,7 +14,6 @@ import com.example.telega.utilits.intentActivity
 import com.example.telega.utilits.intentFragment
 import com.example.telega.utilits.showToast
 import com.google.firebase.FirebaseException
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
@@ -27,7 +26,7 @@ class InputPhoneNumberFragment : Fragment(R.layout.fragment_input_phone_number) 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         mBinding = FragmentInputPhoneNumberBinding.inflate(inflater, container, false)
         return mBinding.root
     }
@@ -84,13 +83,13 @@ class InputPhoneNumberFragment : Fragment(R.layout.fragment_input_phone_number) 
         )
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            InputPhoneNumberFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
-    }
+//    companion object {
+//
+//        @JvmStatic
+//        fun newInstance(param1: String, param2: String) =
+//            InputPhoneNumberFragment().apply {
+//                arguments = Bundle().apply {
+//                }
+//            }
+//    }
 }

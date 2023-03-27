@@ -7,6 +7,7 @@ import com.example.telega.databinding.ActivityMainBinding
 import com.example.telega.ui.fragment.ChatFragment
 import com.example.telega.ui.objects.AppDrawer
 import com.example.telega.utilits.AUTH
+import com.example.telega.utilits.initFirebase
 import com.example.telega.utilits.intentActivity
 import com.example.telega.utilits.intentFragment
 import com.google.firebase.auth.FirebaseAuth
@@ -14,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mToolbar: androidx.appcompat.widget.Toolbar
-    private lateinit var mAppDrawer: AppDrawer
+    lateinit var mAppDrawer: AppDrawer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     private fun initFields() {
         mToolbar = mBinding.mainToolbar
         mAppDrawer = AppDrawer(this, mToolbar)
-        AUTH = FirebaseAuth.getInstance()
+        initFirebase()
 
     }
 }

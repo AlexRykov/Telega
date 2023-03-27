@@ -9,11 +9,7 @@ import com.example.telega.MainActivity
 import com.example.telega.R
 import com.example.telega.activities.RegisterActivity
 import com.example.telega.databinding.FragmentInputVerificationCodeBinding
-import com.example.telega.utilits.AUTH
-import com.example.telega.utilits.AppTextWatcher
-import com.example.telega.utilits.intentActivity
-import com.example.telega.utilits.showToast
-import com.google.firebase.auth.FirebaseAuth
+import com.example.telega.utilits.*
 import com.google.firebase.auth.PhoneAuthProvider
 
 
@@ -23,7 +19,7 @@ class InputVerificationCodeFragment(val phoneNum: String, val id: String) : Frag
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         mBinding = FragmentInputVerificationCodeBinding.inflate(inflater, container, false)
         return mBinding.root
     }
@@ -44,8 +40,28 @@ class InputVerificationCodeFragment(val phoneNum: String, val id: String) : Frag
         val credential = PhoneAuthProvider.getCredential(id, code)
         AUTH.signInWithCredential(credential).addOnCompleteListener { task ->
             if(task.isSuccessful){
-                showToast("Welcome")
-                (activity as RegisterActivity).intentActivity(MainActivity())
+
+                val uid = AUTH.currentUser?.uid.toString()
+                val dateMap = mutableMapOf<String, Any>()
+                dateMap[CHILD_ID] = uid
+                dateMap[CHILD_PHONE] = phoneNum
+                dateMap[CHILD_USERNAME] = uid
+
+//                call to Root element of Database
+                REF_DATABASE_ROOT
+//                        call or /create to Node 'users'
+                    .child(NODE_USERS)
+//                        call or /create to Node 'id'
+                    .child(uid)
+//                        push Data to Database
+                    .updateChildren(dateMap)
+//
+                    .addOnCompleteListener { task2 ->
+                        if (task2.isSuccessful){
+                            showToast("Welcome")
+                            (activity as RegisterActivity).intentActivity(MainActivity())
+                        } else showToast(task2.exception?.message.toString())
+                    }
             } else {
                 showToast(task.exception?.message.toString())
             }
