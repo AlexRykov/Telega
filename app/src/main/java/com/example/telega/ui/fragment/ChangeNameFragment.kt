@@ -1,6 +1,7 @@
 package com.example.telega.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.example.telega.MainActivity
@@ -31,6 +32,13 @@ class ChangeNameFragment : Fragment(R.layout.fragment_change_name) {
     override fun onResume() {
         super.onResume()
         setHasOptionsMenu(true)
+//        this method divide full name "Adam Tomas" by delimiters ' space ' on "Adam" and "Tomas"
+        val fullNameList: List<String> = USER.fullname.split(" ")
+
+//         You HAVE TO write --fullname-- like in Database nodes not fullName ! ! !
+
+        mBinding.settingsInputName.setText(fullNameList[0])
+        mBinding.settingsInputSecondName.setText(fullNameList[1])
 
     }
 
@@ -56,7 +64,7 @@ class ChangeNameFragment : Fragment(R.layout.fragment_change_name) {
                 .addOnCompleteListener {
                     if(it.isSuccessful){
                         showToast(getString(R.string.toast_data_updated))
-                        USER.fullName = fullName
+                        USER.fullname = fullName
                         fragmentManager?.popBackStack()
                     } else {
                         showToast("sdgdg")

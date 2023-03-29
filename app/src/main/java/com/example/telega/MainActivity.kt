@@ -2,15 +2,17 @@ package com.example.telega
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.telega.activities.RegisterActivity
 import com.example.telega.databinding.ActivityMainBinding
+import com.example.telega.models.User
 import com.example.telega.ui.fragment.ChatFragment
 import com.example.telega.ui.objects.AppDrawer
-import com.example.telega.utilits.AUTH
-import com.example.telega.utilits.initFirebase
-import com.example.telega.utilits.intentActivity
-import com.example.telega.utilits.intentFragment
+import com.example.telega.utilits.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
@@ -47,6 +49,17 @@ class MainActivity : AppCompatActivity() {
         mToolbar = mBinding.mainToolbar
         mAppDrawer = AppDrawer(this, mToolbar)
         initFirebase()
+        initUser()
 
+    }
+
+    private fun initUser() {
+
+        REF_DATABASE_ROOT.child(NODE_USERS).child(UID)
+//                15 Lesson 4:00 . This listener connect to Database, download data of User, and close
+            .addListenerForSingleValueEvent(AppValueEventListener{
+             USER = it.getValue(User::class.java)?: User()
+                Log.d("USER", USER.fullname)
+            })
     }
 }

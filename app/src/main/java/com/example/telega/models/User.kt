@@ -2,9 +2,9 @@ package com.example.telega.models
 
 data class User (
     val id: String = "",
-    var userName:String = "",
+    var username:String = "",
     var bio: String = "",
-    var fullName: String = "",
+    var fullname: String = "",
     var status: String = "",
     var phone: String = "",
     var photoUrl: String = ""
