@@ -21,4 +21,8 @@
     <string name="sms_hint">_ _ _ _ _ _</string>
     <string name="your_phone_num_is">Your Phone num is</string>
     <string name="input_your_phone_num">input your phone num</string>
+    <string name="input_name">Input Name</string>
+    <string name="input_second_name">Input second name</string>
+    <string name="name_can_not_be_empty">Name can not be Empty</string>
+    <string name="toast_data_updated">data updated</string>
 </resources>

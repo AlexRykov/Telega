@@ -8,6 +8,7 @@ import com.example.telega.R
 import com.example.telega.activities.RegisterActivity
 import com.example.telega.utilits.AUTH
 import com.example.telega.utilits.intentActivity
+import com.example.telega.utilits.intentFragment
 
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings){
@@ -29,6 +30,9 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings){
             R.id.settings_menu_change_exit -> {
                 AUTH.signOut()
                 (activity as MainActivity).intentActivity(RegisterActivity())
+            }
+            R.id.settings_menu_change_name -> {
+                intentFragment(R.id.data_container, ChangeNameFragment())
             }
         }
         return true
