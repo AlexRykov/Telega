@@ -11,7 +11,7 @@ import com.example.telega.databinding.FragmentInputPhoneNumberBinding
 import com.example.telega.utilits.*
 
 
-class ChangeNameFragment : Fragment(R.layout.fragment_change_name) {
+class ChangeNameFragment : BaseFragment(R.layout.fragment_change_name) {
 
 
     private lateinit var mBinding: FragmentChangeNameBinding
@@ -35,7 +35,7 @@ class ChangeNameFragment : Fragment(R.layout.fragment_change_name) {
 //        this method divide full name "Adam Tomas" by delimiters ' space ' on "Adam" and "Tomas"
         val fullNameList: List<String> = USER.fullname.split(" ")
 
-//         You HAVE TO write --fullname-- like in Database nodes not fullName ! ! !
+//    lesson 15     You HAVE TO write --fullname-- like in Database nodes (firebaseHelper.kt) not fullName ! ! !
 
         mBinding.settingsInputName.setText(fullNameList[0])
         mBinding.settingsInputSecondName.setText(fullNameList[1])

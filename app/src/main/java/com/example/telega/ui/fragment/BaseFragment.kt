@@ -6,6 +6,8 @@ import com.example.telega.MainActivity
 
 open class BaseFragment(layout:Int):Fragment(layout) {
 
+
+
     override fun onStart() {
         super.onStart()
         (activity as MainActivity).mAppDrawer.disableDrawer()

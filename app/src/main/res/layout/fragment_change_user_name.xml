@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.ChangeNameFragment">
+    tools:context=".ui.fragment.ChangeUserNameFragment">
 
     <EditText
         android:layout_width="match_parent"
-        android:id="@+id/settings_input_name"
+        android:id="@+id/settings_input_user_name"
         android:layout_height="50dp"
-        android:hint="@string/input_name"
+        android:hint="@string/settings_hint_input_username"
         android:textColor="@color/black"
         android:inputType="textCapWords"
         android:autofillHints=""
@@ -20,23 +20,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="@dimen/horizontal_margin"
-        android:padding="@dimen/app_padding"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:id="@+id/settings_input_second_name"
-        android:layout_height="50dp"
-        android:hint="@string/input_second_name"
-        android:textColor="@color/black"
-        android:inputType="textCapWords"
-        android:autofillHints=""
-        android:maxLines="1"
-
-        android:textSize="@dimen/text_normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_input_name"
         android:layout_margin="@dimen/horizontal_margin"
         android:padding="@dimen/app_padding"/>
 

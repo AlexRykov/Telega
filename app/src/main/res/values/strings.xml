@@ -25,4 +25,6 @@
     <string name="input_second_name">Input second name</string>
     <string name="name_can_not_be_empty">Name can not be Empty</string>
     <string name="toast_data_updated">data updated</string>
+    <string name="settings_hint_input_username">User name</string>
+    <string name="user_name_busy">This user name is already exist</string>
 </resources>

@@ -1,22 +1,47 @@
 package com.example.telega.ui.fragment
 
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.os.Bundle
+import android.view.*
 import com.example.telega.MainActivity
 import com.example.telega.R
 import com.example.telega.activities.RegisterActivity
+import com.example.telega.databinding.FragmentChangeNameBinding
+import com.example.telega.databinding.FragmentSettingsBinding
 import com.example.telega.utilits.AUTH
+import com.example.telega.utilits.USER
 import com.example.telega.utilits.intentActivity
 import com.example.telega.utilits.intentFragment
 
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings){
 
+    private lateinit var mBinding: FragmentSettingsBinding
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        mBinding = FragmentSettingsBinding.inflate(inflater, container, false)
+        return mBinding.root
+    }
+
 
     override fun onResume() {
         super.onResume()
         setHasOptionsMenu(true)
+        initFields()
+
+    }
+
+    private fun initFields() {
+        with(mBinding){
+            settingsAbout.text = USER.bio
+            tvFullName.text = USER.fullname
+            settingsPhoneNumber.text = USER.phone
+            tvOnline.text = USER.status
+            settingsUsername.text = USER.username
+            settingsBtnChangeUsername.setOnClickListener { intentFragment(R.id.data_container, ChangeUserNameFragment()) }
+        }
 
     }
 
@@ -38,12 +63,4 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings){
         return true
     }
 
-//    companion object {
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            ChatFragment().apply {
-//                arguments = Bundle().apply {
-//                }
-//            }
-//    }
 }
