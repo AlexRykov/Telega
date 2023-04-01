@@ -174,12 +174,12 @@
 
         <TextView
             android:id="@+id/settings_about"
-            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
             style="@style/normal_text"
-            android:layout_marginEnd="352dp"
+            android:layout_marginTop="5dp"
             tools:text="@string/settings_default_about"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/settings_btn_about_user"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/settings_btn_about_user">
 
         </TextView>

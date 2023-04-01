@@ -5,7 +5,6 @@ import android.view.*
 import com.example.telega.MainActivity
 import com.example.telega.R
 import com.example.telega.activities.RegisterActivity
-import com.example.telega.databinding.FragmentChangeNameBinding
 import com.example.telega.databinding.FragmentSettingsBinding
 import com.example.telega.utilits.AUTH
 import com.example.telega.utilits.USER
@@ -35,12 +34,13 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings){
 
     private fun initFields() {
         with(mBinding){
-            settingsAbout.text = USER.bio
             tvFullName.text = USER.fullname
             settingsPhoneNumber.text = USER.phone
             tvOnline.text = USER.status
             settingsUsername.text = USER.username
+            settingsAbout.text = USER.about
             settingsBtnChangeUsername.setOnClickListener { intentFragment(R.id.data_container, ChangeUserNameFragment()) }
+            settingsBtnAboutUser.setOnClickListener { intentFragment(R.id.data_container, ChangeAboutFragment()) }
         }
 
     }

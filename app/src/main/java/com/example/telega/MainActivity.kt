@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
 //                15 Lesson 4:00 . This listener connect to Database, download data of User, and close
             .addListenerForSingleValueEvent(AppValueEventListener{
              USER = it.getValue(User::class.java)?: User()
-                Log.d("USER", USER.fullname)
             })
     }
 }

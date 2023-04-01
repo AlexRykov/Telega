@@ -11,7 +11,7 @@ import com.example.telega.databinding.FragmentInputPhoneNumberBinding
 import com.example.telega.utilits.*
 
 
-class ChangeNameFragment : BaseFragment(R.layout.fragment_change_name) {
+class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
 
 
     private lateinit var mBinding: FragmentChangeNameBinding
@@ -24,45 +24,35 @@ class ChangeNameFragment : BaseFragment(R.layout.fragment_change_name) {
         return mBinding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        (activity as MainActivity).mAppDrawer.disableDrawer()
-    }
-
     override fun onResume() {
         super.onResume()
-        setHasOptionsMenu(true)
-//        this method divide full name "Adam Tomas" by delimiters ' space ' on "Adam" and "Tomas"
+        initFullnameList()
+    }
+
+    private fun initFullnameList() {
+        //        this method divide full name "Adam Tomas" by delimiters ' space ' on "Adam" and "Tomas"
         val fullNameList: List<String> = USER.fullname.split(" ")
 
-//    lesson 15     You HAVE TO write --fullname-- like in Database nodes (firebaseHelper.kt) not fullName ! ! !
+        //    lesson 15     You HAVE TO write --fullname-- like in Database nodes (firebaseHelper.kt) not fullName ! ! !
 
-        mBinding.settingsInputName.setText(fullNameList[0])
-        mBinding.settingsInputSecondName.setText(fullNameList[1])
-
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        (activity as MainActivity).menuInflater.inflate(R.menu.settings_menu_confirm, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.settings_confirm_change -> changeName()
+        if (fullNameList.size > 1) {
+            mBinding.settingsInputName.setText(fullNameList[0])
+            mBinding.settingsInputSecondName.setText(fullNameList[1])
+        } else {
+            mBinding.settingsInputName.setText(fullNameList[0])
         }
-        return true
     }
 
-    private fun changeName() {
+    override fun change() {
         val name = mBinding.settingsInputName.text.toString()
         val secondName = mBinding.settingsInputSecondName.text.toString()
-        if (name.isEmpty()){
+        if (name.isEmpty()) {
             showToast(getString(R.string.name_can_not_be_empty))
         } else {
             val fullName = "$name $secondName"
             REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_FULLNAME).setValue(fullName)
                 .addOnCompleteListener {
-                    if(it.isSuccessful){
+                    if (it.isSuccessful) {
                         showToast(getString(R.string.toast_data_updated))
                         USER.fullname = fullName
                         fragmentManager?.popBackStack()
@@ -71,11 +61,5 @@ class ChangeNameFragment : BaseFragment(R.layout.fragment_change_name) {
                     }
                 }
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        (activity as MainActivity).mAppDrawer.enableDrawer()
-
     }
 }
