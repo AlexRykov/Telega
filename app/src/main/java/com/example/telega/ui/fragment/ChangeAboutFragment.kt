@@ -31,7 +31,7 @@ class ChangeAboutFragment : BaseChangeFragment(R.layout.fragment_change_about) {
         if (mAbout.isEmpty()) {
             showToast(getString(R.string.name_can_not_be_empty))
         } else {
-            REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_ABOUT).setValue(mAbout)
+            REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_ABOUT).setValue(mAbout)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         showToast(getString(R.string.toast_data_updated))

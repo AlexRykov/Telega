@@ -1,13 +1,9 @@
 package com.example.telega.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
-import com.example.telega.MainActivity
 import com.example.telega.R
 import com.example.telega.databinding.FragmentChangeNameBinding
-import com.example.telega.databinding.FragmentInputPhoneNumberBinding
 import com.example.telega.utilits.*
 
 
@@ -33,7 +29,7 @@ class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
         //        this method divide full name "Adam Tomas" by delimiters ' space ' on "Adam" and "Tomas"
         val fullNameList: List<String> = USER.fullname.split(" ")
 
-        //    lesson 15     You HAVE TO write --fullname-- like in Database nodes (firebaseHelper.kt) not fullName ! ! !
+        //    lesson 15     You HAVE TO write --fullname-- like in Database nodes (appDatabaseHelper.kt) not fullName ! ! !
 
         if (fullNameList.size > 1) {
             mBinding.settingsInputName.setText(fullNameList[0])
@@ -50,7 +46,7 @@ class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
             showToast(getString(R.string.name_can_not_be_empty))
         } else {
             val fullName = "$name $secondName"
-            REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_FULLNAME).setValue(fullName)
+            REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_FULLNAME).setValue(fullName)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         showToast(getString(R.string.toast_data_updated))

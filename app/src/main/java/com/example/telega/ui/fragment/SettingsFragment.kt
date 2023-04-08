@@ -2,14 +2,12 @@ package com.example.telega.ui.fragment
 
 import android.os.Bundle
 import android.view.*
-import com.example.telega.MainActivity
 import com.example.telega.R
 import com.example.telega.activities.RegisterActivity
 import com.example.telega.databinding.FragmentSettingsBinding
-import com.example.telega.utilits.AUTH
-import com.example.telega.utilits.USER
-import com.example.telega.utilits.intentActivity
-import com.example.telega.utilits.intentFragment
+import com.example.telega.utilits.*
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings){
@@ -41,8 +39,17 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings){
             settingsAbout.text = USER.about
             settingsBtnChangeUsername.setOnClickListener { intentFragment(R.id.data_container, ChangeUserNameFragment()) }
             settingsBtnAboutUser.setOnClickListener { intentFragment(R.id.data_container, ChangeAboutFragment()) }
+            settingsChangePhoto.setOnClickListener { changePhotoUser() }
         }
 
+    }
+
+    private fun changePhotoUser() {
+        CropImage.activity()
+            .setAspectRatio(1,1)
+            .setRequestedSize(800,800)
+            .setCropShape(CropImageView.CropShape.OVAL)
+            .start(APP_ACTIVITY)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -54,7 +61,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings){
         when(item.itemId){
             R.id.settings_menu_change_exit -> {
                 AUTH.signOut()
-                (activity as MainActivity).intentActivity(RegisterActivity())
+                APP_ACTIVITY.intentActivity(RegisterActivity())
             }
             R.id.settings_menu_change_name -> {
                 intentFragment(R.id.data_container, ChangeNameFragment())

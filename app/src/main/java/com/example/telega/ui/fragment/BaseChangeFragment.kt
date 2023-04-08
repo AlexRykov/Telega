@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.example.telega.MainActivity
 import com.example.telega.R
+import com.example.telega.utilits.APP_ACTIVITY
 
 open class BaseChangeFragment(layout: Int): Fragment(layout) {
 
@@ -30,6 +31,7 @@ open class BaseChangeFragment(layout: Int): Fragment(layout) {
 
     override fun onStop() {
         super.onStop()
-        (activity as MainActivity).mAppDrawer.enableDrawer()
+        APP_ACTIVITY.mAppDrawer.enableDrawer()
+        APP_ACTIVITY.hideKeyboard()
     }
 }

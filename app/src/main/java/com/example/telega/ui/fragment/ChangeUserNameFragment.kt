@@ -2,7 +2,6 @@ package com.example.telega.ui.fragment
 
 import android.os.Bundle
 import android.view.*
-import com.example.telega.MainActivity
 import com.example.telega.R
 import com.example.telega.databinding.FragmentChangeUserNameBinding
 import com.example.telega.utilits.*
@@ -38,7 +37,7 @@ class ChangeUserNameFragment : BaseChangeFragment(R.layout.fragment_change_user_
                     if (it.hasChild(mNewUserName)) {
                         showToast(getString(R.string.user_name_busy))
                     } else {
-                        REF_DATABASE_ROOT.child(NODE_USERNAMES).child(mNewUserName).setValue(UID)
+                        REF_DATABASE_ROOT.child(NODE_USERNAMES).child(mNewUserName).setValue(CURRENT_UID)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     updateCurrentUserName()
@@ -52,7 +51,7 @@ class ChangeUserNameFragment : BaseChangeFragment(R.layout.fragment_change_user_
     }
 
     private fun updateCurrentUserName() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_USERNAME)
+        REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_USERNAME)
             .setValue(mNewUserName)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
