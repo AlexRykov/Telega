@@ -50,6 +50,7 @@ class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         showToast(getString(R.string.toast_data_updated))
+                        hideKeyboard()
                         USER.fullname = fullName
                         fragmentManager?.popBackStack()
                     } else {
