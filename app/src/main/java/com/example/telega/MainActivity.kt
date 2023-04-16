@@ -26,17 +26,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(mBinding.root)
         APP_ACTIVITY = this
         initFirebase()
-        initUser{
+        initUser {
             initFields()
             initFunc()
         }
-
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-
     }
 
     private fun initFunc() {
@@ -49,10 +42,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private fun initFields() {
         mToolbar = mBinding.mainToolbar
         mAppDrawer = AppDrawer(this, mToolbar)
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        AppStates.updateState(AppStates.ONLINE)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        AppStates.updateState(AppStates.OFFLINE)
     }
 }

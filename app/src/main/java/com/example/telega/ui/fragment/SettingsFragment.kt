@@ -2,14 +2,12 @@ package com.example.telega.ui.fragment
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import com.example.telega.R
 import com.example.telega.activities.RegisterActivity
 import com.example.telega.databinding.FragmentSettingsBinding
 import com.example.telega.utilits.*
-import com.google.firebase.storage.StorageReference
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 
@@ -38,7 +36,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         with(mBinding) {
             tvFullName.text = USER.fullname
             settingsPhoneNumber.text = USER.phone
-            tvOnline.text = USER.status
+            tvOnline.text = USER.state
             settingsUsername.text = USER.username
             settingsAbout.text = USER.about
             settingsBtnChangeUsername.setOnClickListener {
