@@ -1,19 +1,14 @@
 package com.example.telega
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.getSystemService
 import com.example.telega.activities.RegisterActivity
 import com.example.telega.databinding.ActivityMainBinding
-import com.example.telega.models.User
 import com.example.telega.ui.fragment.ChatFragment
 import com.example.telega.ui.objects.AppDrawer
 import com.example.telega.utilits.*
-import com.google.firebase.database.core.Context
-import com.theartofdev.edmodo.cropper.CropImage
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
@@ -27,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         APP_ACTIVITY = this
         initFirebase()
         initUser {
+            initContacts()
             initFields()
             initFunc()
         }
@@ -56,5 +52,20 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         AppStates.updateState(AppStates.OFFLINE)
+    }
+//      lesson 28 7:00 Window of permission AGAIN !
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (ContextCompat.checkSelfPermission(
+                APP_ACTIVITY,
+                READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            initContacts()
+        }
     }
 }

@@ -28,4 +28,5 @@
     <string name="settings_hint_input_username">User name</string>
     <string name="user_name_busy">This user name is already exist</string>
     <string name="input_about">about</string>
+    <string name="readingContacts">reading contacts</string>
 </resources>
