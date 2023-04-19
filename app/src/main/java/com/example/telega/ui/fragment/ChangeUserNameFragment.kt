@@ -56,6 +56,7 @@ class ChangeUserNameFragment : BaseChangeFragment(R.layout.fragment_change_user_
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     showToast(getString(R.string.toast_data_updated))
+                    hideKeyboard()
                     deleteOldUserNameFromDataBase()
                 } else {
                     showToast(it.exception?.message.toString())
@@ -68,6 +69,7 @@ class ChangeUserNameFragment : BaseChangeFragment(R.layout.fragment_change_user_
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     showToast(getString(R.string.toast_data_updated))
+                    hideKeyboard()
                     USER.username = mNewUserName
                     fragmentManager?.popBackStack()
                 } else {

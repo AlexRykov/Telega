@@ -47,20 +47,26 @@ class InputVerificationCodeFragment(val phoneNum: String, val id: String) : Frag
                 dateMap[CHILD_PHONE] = phoneNum
                 dateMap[CHILD_USERNAME] = uid
 
+//          31 lesson.  after Auth add phone nums from Contacts to Database
+                REF_DATABASE_ROOT.child(NODE_PHONES).child(phoneNum).setValue(uid)
+                    .addOnFailureListener{showToast(it.message.toString())}
+                    .addOnSuccessListener {
+
+//          xx lesson
 //                call to Root element of Database
-                REF_DATABASE_ROOT
+                        REF_DATABASE_ROOT
 //                        call or /create to Node 'users'
-                    .child(NODE_USERS)
+                            .child(NODE_USERS)
 //                        call or /create to Node 'id'
-                    .child(uid)
+                            .child(uid)
 //                        push Data to Database
-                    .updateChildren(dateMap)
+                            .updateChildren(dateMap)
 //
-                    .addOnCompleteListener { task2 ->
-                        if (task2.isSuccessful){
-                            showToast("Welcome")
-                            (activity as RegisterActivity).intentActivity(MainActivity())
-                        } else showToast(task2.exception?.message.toString())
+                            .addOnSuccessListener {
+                                showToast("Welcome")
+                                (activity as RegisterActivity).intentActivity(MainActivity())
+                            }
+                            .addOnFailureListener { showToast(it.message.toString()) }
                     }
             } else {
                 showToast(task.exception?.message.toString())

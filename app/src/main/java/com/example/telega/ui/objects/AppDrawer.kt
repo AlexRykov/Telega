@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.telega.R
+import com.example.telega.ui.fragment.ContactsFragment
 import com.example.telega.ui.fragment.SettingsFragment
 import com.example.telega.utilits.APP_ACTIVITY
 import com.example.telega.utilits.USER
@@ -25,9 +26,11 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader
 import com.mikepenz.materialdrawer.util.DrawerImageLoader
+import java.text.FieldPosition
 
-class AppDrawer(val mainActivity: AppCompatActivity, val toolbar: Toolbar) {
-
+class AppDrawer {
+//    32 lesson delete it
+//class AppDrawer(val mainActivity: AppCompatActivity, val toolbar: Toolbar) {
     private lateinit var mDrawer: Drawer
     private lateinit var mHeader: AccountHeader
     private lateinit var mDrawerLayout: DrawerLayout
@@ -43,19 +46,19 @@ class AppDrawer(val mainActivity: AppCompatActivity, val toolbar: Toolbar) {
 
     fun disableDrawer() {
         mDrawer.actionBarDrawerToggle?.isDrawerIndicatorEnabled = false
-        mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        APP_ACTIVITY.supportActionBar?.setDisplayHomeAsUpEnabled(true)
 //        Lock Drawer in Close (Invisible) Mode
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-        toolbar.setNavigationOnClickListener {
-            mainActivity.supportFragmentManager.popBackStack()
+        APP_ACTIVITY.mToolbar.setNavigationOnClickListener {
+            APP_ACTIVITY.supportFragmentManager.popBackStack()
         }
     }
 
     fun enableDrawer() {
-        mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        APP_ACTIVITY.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         mDrawer.actionBarDrawerToggle?.isDrawerIndicatorEnabled = true
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-        toolbar.setNavigationOnClickListener {
+        APP_ACTIVITY.mToolbar.setNavigationOnClickListener {
             APP_ACTIVITY.mAppDrawer.updateHeader()
             mDrawer.openDrawer()
         }
@@ -64,8 +67,8 @@ class AppDrawer(val mainActivity: AppCompatActivity, val toolbar: Toolbar) {
     //      Create left side thing with options
     private fun createDrawer() {
         mDrawer = DrawerBuilder()
-            .withActivity(mainActivity)
-            .withToolbar(toolbar)
+            .withActivity(APP_ACTIVITY)
+            .withToolbar(APP_ACTIVITY.mToolbar)
             .withActionBarDrawerToggle(true)
             .withSelectedItem(-1)
             .withAccountHeader(mHeader)
@@ -123,15 +126,20 @@ class AppDrawer(val mainActivity: AppCompatActivity, val toolbar: Toolbar) {
                     position: Int,
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
-                    when (position) {
-                        7 -> mainActivity.intentFragment(R.id.data_container, SettingsFragment())
-                    }
+                    clickToItem(position)
                     Toast.makeText(applicationContext, "Click on $position", Toast.LENGTH_SHORT)
                         .show()
                     return false
                 }
             })
             .build()
+    }
+
+    private fun clickToItem(position: Int){
+        when (position) {
+            7 -> APP_ACTIVITY.intentFragment(R.id.data_container, SettingsFragment())
+            4 -> APP_ACTIVITY.intentFragment(R.id.data_container, ContactsFragment())
+        }
     }
 
     //      Create top side thing with app name
@@ -142,7 +150,7 @@ class AppDrawer(val mainActivity: AppCompatActivity, val toolbar: Toolbar) {
             .withIcon(USER.photoUrl)
             .withIdentifier(200)
         mHeader = AccountHeaderBuilder()
-            .withActivity(mainActivity)
+            .withActivity(APP_ACTIVITY)
             .withHeaderBackground(R.drawable.header)
             .addProfiles(
                 mCurrentProfile

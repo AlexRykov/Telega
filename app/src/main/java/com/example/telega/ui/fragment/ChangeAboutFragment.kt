@@ -35,6 +35,7 @@ class ChangeAboutFragment : BaseChangeFragment(R.layout.fragment_change_about) {
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         showToast(getString(R.string.toast_data_updated))
+                        hideKeyboard()
                         USER.about = mAbout
                         fragmentManager?.popBackStack()
                     } else {
