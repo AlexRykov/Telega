@@ -22,6 +22,8 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
     private lateinit var mAdapter: FirebaseRecyclerAdapter<CommonModel,ContactHolder>
     private lateinit var mRefContacts:DatabaseReference
     private lateinit var mRefUsers:DatabaseReference
+    private lateinit var mRefUsersListeners:AppValueEventListener
+    private var mapListeners = hashMapOf<DatabaseReference, AppValueEventListener>()
 
     private lateinit var mBinding: FragmentContactsBinding
 
@@ -51,6 +53,7 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
             .build()
 
         mAdapter = object : FirebaseRecyclerAdapter<CommonModel, ContactHolder>(options){
+//            launch when the adapter get opportunity to ViewGroup
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactHolder {
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.contact_item, parent, false)
                 return ContactHolder(view)
@@ -64,14 +67,15 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
 
 
                 mRefUsers = REF_DATABASE_ROOT.child(NODE_USERS).child(model.id)
-                mRefUsers.addValueEventListener(AppValueEventListener{
 
+                mRefUsersListeners = AppValueEventListener {
                     val contact = it.getCommonModel()
                     holder.a.text = contact.fullname
                     holder.s.text = contact.state
                     holder.f.downloadAndSetImage(contact.photoUrl)
-                })
-
+                }
+                mRefUsers.addValueEventListener(mRefUsersListeners)
+                mapListeners[mRefUsers] = mRefUsersListeners
             }
 
         }
@@ -93,6 +97,9 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
         super.onStop()
         APP_ACTIVITY.title = getString(R.string.app_name)
         mAdapter.stopListening()
+        mapListeners.forEach{
+            it.key.removeEventListener(it.value)
+        }
     }
 }
 
