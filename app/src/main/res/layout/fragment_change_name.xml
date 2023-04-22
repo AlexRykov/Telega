@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="@dimen/horizontal_margin"
+        android:layout_margin="@dimen/app_margin"
         android:padding="@dimen/app_padding"/>
 
     <EditText
@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_input_name"
-        android:layout_margin="@dimen/horizontal_margin"
+        android:layout_margin="@dimen/app_margin"
         android:padding="@dimen/app_padding"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
